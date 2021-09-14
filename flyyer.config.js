@@ -20,7 +20,7 @@ module.exports = config({
   `,
   homepage: 'https://www.flyyer.io',
   license: 'MIT',
-  repository: 'flyyer-marketplace-angled',
+  repository: 'https://github.com/useflyyer/flyyer-marketplace-angled',
   keywords: ['official', 'ecommerce'],
   private: false, // Set to false to deploy publicly to https://flyyer.io/community
   sizes: ['THUMBNAIL', 'BANNER', 'SQUARE', 'STORY'] // Declare supported sizes
