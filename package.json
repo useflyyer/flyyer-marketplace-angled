@@ -18,7 +18,7 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@flyyer/cli": "^3.0.0-beta.3",
+    "@flyyer/cli": "^3.0.0-beta.4",
     "@parcel/config-default": "^2.0.0-rc",
     "@parcel/transformer-image": "^2.0.0-rc",
     "@tailwindcss/line-clamp": "^0.2.1",
@@ -31,7 +31,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.15",
-    "typescript": "^4.2.4",
+    "typescript": "^4.4.3",
     "xo": "^0.39.1"
   },
   "xo": {

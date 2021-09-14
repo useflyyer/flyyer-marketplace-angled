@@ -265,10 +265,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flyyer/cli@^3.0.0-beta.3":
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@flyyer/cli/-/cli-3.0.0-beta.3.tgz#1033b5de3a3b44fbc9946bdac5628b7fe2ea6d66"
-  integrity sha512-TSUcVwFFcHiQg246ADP67/YNXJQLEZ8MDDtFTXwDZNXGsEjAlKHWCMh2kUg0BISE62IjI6pRHcks/OQ632apsw==
+"@flyyer/cli@^3.0.0-beta.4":
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@flyyer/cli/-/cli-3.0.0-beta.4.tgz#3ebdb0da8dffded9a46e93d4cc22f55ffd19b004"
+  integrity sha512-C0IjSlHzyvwbzOmlFFAc81sFGrV+KzWJhqES1u/QP/REBa+RFe9V8O6AG+DqS5wnazX+dXoYrX7jnc0M6QQdxQ==
   dependencies:
     "@flyyer/flyyer" "^3.3.2"
     "@flyyer/goerr" "^3.0.0"
@@ -7986,6 +7986,11 @@ typescript@^4.2.4:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.2.tgz#6d618640d430e3569a1dfb44f7d7e600ced3ee86"
   integrity sha512-gzP+t5W4hdy4c+68bfcv0t400HVJMMd2+H9B7gae1nQlBzCqvrXX+6GL/b3GAgyTH966pzrZ70/fRjwAtZksSQ==
+
+typescript@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
+  integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"
