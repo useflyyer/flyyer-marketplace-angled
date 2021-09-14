@@ -2,7 +2,6 @@
   "name": "angled",
   "version": "1.0.1",
   "private": true,
-  "sideEffects": false,
   "scripts": {
     "start": "flyyer start",
     "build": "flyyer build",
@@ -19,7 +18,7 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@flyyer/cli": "^3.0.0-beta.2",
+    "@flyyer/cli": "^3.0.0-beta.3",
     "@parcel/config-default": "^2.0.0-rc",
     "@parcel/transformer-image": "^2.0.0-rc",
     "@tailwindcss/line-clamp": "^0.2.1",

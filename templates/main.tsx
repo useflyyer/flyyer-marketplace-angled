@@ -24,6 +24,7 @@ export const schema = V.Object({
   image: V.Nullable(
     V.Image({
       title: 'Product image URL',
+      default: nintendo,
       examples: [nintendo]
     })
   ),
