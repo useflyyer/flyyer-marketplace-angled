@@ -54,7 +54,7 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
     console.error('[Flyyer Variables]:', errors);
   }
 
-  const formatter = useFormatter(locale, currency, FORMATTER_OPTIONS);
+  const formatter = useFormatter(locale, currency);
 
   return (
     <Layer id="banner" className={clsx('bg-white')}>
@@ -136,6 +136,4 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   );
 }
 
-const FORMATTER_OPTIONS = {
-  maximumFractionDigits: 0, // 2
-};
+

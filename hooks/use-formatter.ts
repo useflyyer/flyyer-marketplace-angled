@@ -3,7 +3,7 @@ import {useMemo} from 'react';
 export function useFormatter(
   locale: string | undefined,
   currency: string | undefined,
-  options: Partial<Intl.NumberFormatOptions>,
+  options?: Partial<Intl.NumberFormatOptions>,
 ) {
   return useMemo(() => {
     try {
