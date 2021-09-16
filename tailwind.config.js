@@ -1,3 +1,5 @@
+const process = require('process');
+
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 /**
@@ -9,7 +11,7 @@ module.exports = {
     './.flyyer-processed/**/*.{html,js,jsx,ts,tsx,vue,vuex,css,scss,sass,less}',
     './templates/**/*.{html,js,jsx,ts,tsx,vue,vuex,css,scss,sass,less}',
     './components/**/*.{html,js,jsx,ts,tsx,vue,vuex,css,scss,sass,less}',
-    './styles/**/*.{html,js,jsx,ts,tsx,vue,vuex,css,scss,sass,less}'
+    './styles/**/*.{html,js,jsx,ts,tsx,vue,vuex,css,scss,sass,less}',
   ],
   /**
    * Toggle dark/light scheme depending on contrast.
@@ -23,7 +25,7 @@ module.exports = {
          * Instagram stories have a recommended safe-area for content.
          * https://docs.flyyer.io/docs/advanced/safe-area
          */
-        storysafe: '250px'
+        storysafe: '250px',
       },
       /**
        * Enable 12x12 grid layout, by default tailwindcss starts with 12 columns and 6 rows.
@@ -34,7 +36,7 @@ module.exports = {
         10: 'repeat(10, minmax(0, 1fr))',
         11: 'repeat(11, minmax(0, 1fr))',
         12: 'repeat(12, minmax(0, 1fr))',
-        13: 'repeat(13, minmax(0, 1fr))'
+        13: 'repeat(13, minmax(0, 1fr))',
       },
       gridRow: {
         'span-7': 'span 7 / span 7',
@@ -42,7 +44,7 @@ module.exports = {
         'span-9': 'span 9 / span 9',
         'span-10': 'span 10 / span 10',
         'span-11': 'span 11 / span 11',
-        'span-12': 'span 12 / span 12'
+        'span-12': 'span 12 / span 12',
       },
       gridRowStart: {
         8: '8',
@@ -50,7 +52,7 @@ module.exports = {
         10: '10',
         11: '11',
         12: '12',
-        13: '13'
+        13: '13',
       },
       gridRowEnd: {
         8: '8',
@@ -58,8 +60,8 @@ module.exports = {
         10: '10',
         11: '11',
         12: '12',
-        13: '13'
-      }
+        13: '13',
+      },
     },
     /**
      * We recommend breakpoints based on height rather than width.
@@ -76,8 +78,8 @@ module.exports = {
       /* The size of a full-screen story for Instagram and others. */
       story: {raw: '(min-height: 1920px)'},
       /* Keep default Tailwind sizes (https://tailwindcss.com/docs/breakpoints#extending-the-default-breakpoints) */
-      ...defaultTheme.screens
-    }
+      ...defaultTheme.screens,
+    },
   },
   variants: {},
   plugins: [
@@ -85,5 +87,5 @@ module.exports = {
     // require('@tailwindcss/line-clamp'),
     // require('@tailwindcss/aspect-ratio'),
     // require('tailwindcss-textshadow'),
-  ]
+  ],
 };

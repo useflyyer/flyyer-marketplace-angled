@@ -1,5 +1,6 @@
 // Created with create-flyyer-app@2.1.2
 
+const process = require('process');
 const {config} = require('@flyyer/types');
 const {default: endent} = require('endent');
 require('dotenv').config();
@@ -23,5 +24,5 @@ module.exports = config({
   repository: 'https://github.com/useflyyer/flyyer-marketplace-angled',
   keywords: ['official', 'ecommerce'],
   private: false, // Set to false to deploy publicly to https://flyyer.io/community
-  sizes: ['THUMBNAIL', 'BANNER', 'SQUARE', 'STORY'] // Declare supported sizes
+  sizes: ['BANNER'], // Declare supported sizes
 });

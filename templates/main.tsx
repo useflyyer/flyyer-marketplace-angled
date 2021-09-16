@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {Variable as V, Validator, Static} from '@flyyer/variables';
-import {goerr} from '@flyyer/goerr';
+
 import {TemplateProps} from '@flyyer/types';
 
 import '../styles/tailwind.css';
@@ -11,6 +11,8 @@ import background from '../static/background.jpeg';
 import nintendo from '../static/nintendo.png';
 
 import {Layer} from '../components/layers';
+import {useFormatter} from '../hooks/use-formatter';
+import {IS_FINITE} from '../utils';
 
 /**
  * Export to enable variables UI on Flyyer.io
@@ -18,23 +20,23 @@ import {Layer} from '../components/layers';
 export const schema = V.Object({
   title: V.Nullable(V.String()),
   currency: V.Optional(
-    V.String({default: 'USD', examples: ['USD', 'EUR', 'CLP', 'RUB']})
+    V.String({default: 'USD', examples: ['USD', 'EUR', 'CLP', 'RUB']}),
   ),
   price: V.Nullable(V.Number({examples: ['299']})),
   image: V.Nullable(
     V.Image({
       title: 'Product image URL',
       default: nintendo,
-      examples: [nintendo]
-    })
+      examples: [nintendo],
+    }),
   ),
   background: V.Optional(
     V.Image({
       title: 'Background image URL',
-      default: background
-    })
+      default: background,
+    }),
   ),
-  logo: V.Nullable(V.Image({default: logo}))
+  logo: V.Nullable(V.Image({default: logo})),
 });
 type Variables = Static<typeof schema>;
 
@@ -47,27 +49,13 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   const {
     data: {title, image, background, logo, currency, price},
     isValid,
-    errors
+    errors,
   } = validator.parse(variables);
   if (!isValid) {
     console.error('[Flyyer Variables]:', errors);
   }
 
-  const [formatter, formatterError] = goerr(
-    () =>
-      new Intl.NumberFormat(locale, {
-        style: 'currency',
-        currency,
-        currencyDisplay: 'narrowSymbol',
-        maximumFractionDigits: 0 // 2
-      })
-  );
-  if (formatterError) {
-    console.warn(
-      '[Flyyer Template] Error creating Intl.NumberFormat: %o',
-      formatterError
-    );
-  }
+  const formatter = useFormatter(locale, currency, FORMATTER_OPTIONS);
 
   return (
     <Layer id="banner" className={clsx('bg-white')}>
@@ -98,7 +86,7 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
           className={clsx(
             'col-start-0 col-span-full row-start-10 row-span-3',
             'flex flex-row justify-end items-center',
-            'px-3 py-1 space-x-1'
+            'px-3 py-1 space-x-1',
           )}
         >
           {title && (
@@ -108,14 +96,14 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
                 'bg-yellow-300 pl-2 pr-1',
                 'border-b-2 border-r-2 border-yellow-400',
                 'filter drop-shadow-lg',
-                'transform -skew-x-12'
+                'transform -skew-x-12',
               )}
             >
               <h1
                 className={clsx(
                   'text-gray-900 text-base font-bold',
                   'truncate',
-                  'transform skew-x-12'
+                  'transform skew-x-12',
                 )}
               >
                 {title}
@@ -130,13 +118,13 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
                 'bg-gray-700 px-1',
                 'border-b-2 border-r-2 border-gray-800',
                 'filter drop-shadow-lg',
-                'transform -skew-x-12'
+                'transform -skew-x-12',
               )}
             >
               <p
                 className={clsx(
                   'text-white text-lg font-bold',
-                  'transform skew-x-12'
+                  'transform skew-x-12',
                 )}
               >
                 {formatter.format(price)}
@@ -149,6 +137,6 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   );
 }
 
-function IS_FINITE(value: unknown): value is number {
-  return Number.isFinite(value);
-}
+const FORMATTER_OPTIONS = {
+  maximumFractionDigits: 0, // 2
+};
