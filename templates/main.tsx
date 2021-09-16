@@ -18,7 +18,7 @@ import {IS_FINITE} from '../utils';
  * Export to enable variables UI on Flyyer.io
  */
 export const schema = V.Object({
-  title: V.Nullable(V.String()),
+  title: V.Nullable(V.String({examples: ['Nintendo Switch']})),
   currency: V.Optional(
     V.String({default: 'USD', examples: ['USD', 'EUR', 'CLP', 'RUB']}),
   ),
@@ -26,7 +26,6 @@ export const schema = V.Object({
   image: V.Nullable(
     V.Image({
       title: 'Product image URL',
-      default: nintendo,
       examples: [nintendo],
     }),
   ),
