@@ -69,10 +69,15 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
           )}
         </aside>
 
-        <aside className={clsx('col-span-6 row-span-10 p-3')}>
+        <aside
+          className={clsx(
+            'p-3 col-span-6',
+            title || price ? 'row-span-10' : 'row-span-12',
+          )}
+        >
           {image && (
             <img
-              className="w-full h-full object-scale-down"
+              className="w-full h-full object-contain"
               src={image}
               crossOrigin="anonymous"
             />
@@ -135,5 +140,3 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
     </Layer>
   );
 }
-
-
