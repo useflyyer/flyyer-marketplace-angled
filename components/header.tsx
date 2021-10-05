@@ -17,18 +17,43 @@ export function Header({
   return (
     <div
       className={clsx(
-        'flex flex-row justify-end items-center',
+        'flex flex-row sq:flex-col justify-end items-center sq:items-end',
         'px-3 py-1 space-x-1',
         className,
       )}
     >
       {title && (
         <div
-          style={{backgroundColor: color}}
           className={clsx(
+            'hidden sq:block',
             'min-w-0 flex-shrink',
             'pl-2 pr-1',
-            // 'border-b-2 border-r-2 border-yellow-400',
+            'filter drop-shadow-lg',
+          )}
+        >
+          <h1
+            className={clsx(
+              'text-gray-900 dark:text-gray-50 text-base sq:text-lg story:text-2xl font-bold text-right',
+              'line-clamp-1 sq:line-clamp-2 story:line-clamp-3',
+            )}
+          >
+            <span
+              style={{backgroundColor: color}}
+              className={clsx('decoration-clone px-1.5 py-0.5')}
+            >
+              {title}
+            </span>
+          </h1>
+        </div>
+      )}
+      {/* TODO: Duplicated to allow skew. Find a way to support it in one component */}
+      {title && (
+        <div
+          style={{backgroundColor: color}}
+          className={clsx(
+            'block sq:hidden',
+            'min-w-0 flex-shrink',
+            'pl-2 pr-1',
             'filter drop-shadow-lg',
             'transform -skew-x-12',
           )}
@@ -36,11 +61,13 @@ export function Header({
           <h1
             className={clsx(
               'text-gray-900 dark:text-gray-50 text-base sq:text-lg story:text-2xl font-bold text-right',
-              'line-clamp-1 sq:line-clamp-2',
+              'line-clamp-1 sq:line-clamp-2 story:line-clamp-3',
               'transform skew-x-12',
             )}
           >
-            {title}
+            <span className={clsx('decoration-clone px-1.5 py-0.5')}>
+              {title}
+            </span>
           </h1>
         </div>
       )}

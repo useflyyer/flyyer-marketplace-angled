@@ -69,7 +69,7 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   const formatter = useFormatter(locale, currency);
 
   return (
-    <>
+    <Layer className="overflow-hidden">
       <Layer
         id="mobile"
         className={clsx('banner:hidden bg-white grid grid-rows-6')}
@@ -163,7 +163,7 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
           </Layer>
         )}
         {image && (
-          <Layer className="flex pl-12 pr-6 pt-20 pb-12">
+          <Layer className="flex pl-12 pr-6 pt-14 pb-14">
             <img
               className="flex-1 p-2 object-contain object-top"
               crossOrigin="anonymous"
@@ -181,7 +181,7 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
           )}
           <Header
             className={clsx(
-              'absolute bottom-7 right-0 left-0 w-full px-4',
+              'absolute bottom-4 right-0 left-0 w-full px-4',
               isDark && 'dark',
             )}
             title={title}
@@ -214,14 +214,21 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
           </Layer>
         )}
         {image && (
-          <Layer className="flex flex-col pt-32 pb-storysafe">
+          <Layer className="relative flex flex-col justify-start items-stretch pt-32 pb-storysafe">
+            {logo && (
+              <img
+                src={proxy(logo)}
+                className="absolute h-8 top-storysafe right-0 left-0 w-full px-4 object-contain object-center"
+              />
+            )}
+
             <img
-              className="p-6 object-contain object-top"
+              className="px-6 min-h-0 object-contain object-top flex-grow flex-shrink"
               crossOrigin="anonymous"
               src={proxy(image)}
             />
             <Header
-              className={clsx('', isDark && "dark")}
+              className={clsx('flex-none', isDark && 'dark')}
               title={title}
               locale={locale}
               currency={currency}
@@ -230,16 +237,7 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
             />
           </Layer>
         )}
-
-        <Layer>
-          {logo && (
-            <img
-              src={proxy(logo)}
-              className="absolute h-8 top-storysafe right-0 left-0 w-full px-4 object-contain object-center"
-            />
-          )}
-        </Layer>
       </Layer>
-    </>
+    </Layer>
   );
 }
