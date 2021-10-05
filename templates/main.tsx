@@ -62,7 +62,6 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   if (lab) {
     const [L] = lab;
     isDark = L < 70;
-    console.log({L, isDark});
   }
 
   return (
