@@ -24,5 +24,5 @@ module.exports = config({
   repository: 'https://github.com/useflyyer/flyyer-marketplace-angled',
   keywords: ['official', 'ecommerce'],
   private: false, // Set to false to deploy publicly to https://flyyer.io/community
-  sizes: ['BANNER'], // Declare supported sizes
+  sizes: ['BANNER', 'SQUARE', 'STORY', 'THUMBNAIL'], // Declare supported sizes
 });

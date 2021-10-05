@@ -23,7 +23,7 @@ export function useFormatter(
           ...options,
         });
       } catch {
-        return null;;
+        return null;
       }
     }
   }, [currency, locale, options]);

@@ -29,13 +29,13 @@
     "dotenv": "^10.0.0",
     "endent": "^2.1.0",
     "eslint-config-xo-react": "^0.25.0",
-    "eslint-config-xo-typescript": "^0.44.0",
+    "eslint-config-xo-typescript": "^0.45.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.3.9",
     "tailwindcss": "^2.2.16",
     "typescript": "^4.4.3",
-    "xo": "^0.44.0"
+    "xo": "^0.45.0"
   },
   "xo": {
     "prettier": true,
@@ -44,6 +44,7 @@
     "rules": {
       "new-cap": "off",
       "no-unused-vars": "off",
+      "no-warning-comments": "warn",
       "react/prop-types": "off",
       "react/no-array-index-key": "off",
       "react/function-component-definition": "off",
@@ -52,6 +53,7 @@
       "@typescript-eslint/triple-slash-reference": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/naming-convention": "off",
       "@typescript-eslint/no-unsafe-member-access": "off",
       "@typescript-eslint/no-unsafe-call": "off"
     }
