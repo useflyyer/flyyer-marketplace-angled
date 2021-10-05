@@ -1,4 +1,5 @@
 import React from 'react';
+import chroma from 'chroma-js';
 import clsx from 'clsx';
 import {Variable as V, Validator, Static} from '@flyyer/variables';
 import {proxy} from '@flyyer/proxy';
@@ -11,9 +12,9 @@ import background from '../static/background.jpeg';
 import nintendo from '../static/nintendo.png';
 
 import {Layer} from '../components/layers';
+import {Header} from '../components/header';
 import {useFormatter} from '../hooks/use-formatter';
 import {IS_FINITE} from '../utils';
-import {Header} from '../components/header';
 
 /**
  * Export to enable variables UI on Flyyer.io
@@ -30,13 +31,14 @@ export const schema = V.Object({
       examples: [nintendo],
     }),
   ),
-  background: V.Optional(
+  background: V.Nullable(
     V.Image({
       title: 'Background image URL',
       default: background,
     }),
   ),
   logo: V.Nullable(V.Image({default: logo})),
+  color: V.ColorHex({default: '#fcd34d'}),
 });
 type Variables = Static<typeof schema>;
 
@@ -47,12 +49,21 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   const {width, height, variables, agent, locale = 'en'} = props;
 
   const {
-    data: {title, image, background, logo, currency, price},
+    data: {title, image, background, logo, currency, price, color},
     isValid,
     errors,
   } = validator.parse(variables);
   if (!isValid) {
     console.error('[Flyyer Variables]:', errors);
+  }
+
+  // https://github.com/gka/chroma.js/issues/181#issuecomment-423884867
+  const lab = color ? chroma(color).lab() : null;
+  let isDark = false;
+  if (lab) {
+    const [L] = lab;
+    isDark = L < 70;
+    console.log({L, isDark});
   }
 
   const formatter = useFormatter(locale, currency);
@@ -74,13 +85,11 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
         )}
         {logo && (
           <div
-            className={clsx(
-              'bg-gray-900 p-1',
-              image ? 'row-span-1' : 'row-span-full',
-            )}
+            style={{backgroundColor: color}}
+            className={clsx('p-1', image ? 'row-span-1' : 'row-span-full')}
           >
             <img
-              src={logo}
+              src={proxy(logo)}
               crossOrigin="anonymous"
               className="w-full h-full object-contain object-center"
             />
@@ -120,16 +129,20 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
 
         <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
           <Header
-            className="col-start-0 col-span-full row-start-10 row-span-3"
+            className={clsx(
+              'col-start-0 col-span-full row-start-10 row-span-3',
+              isDark && 'dark',
+            )}
             title={title}
             locale={locale}
             currency={currency}
             price={price}
+            color={color}
           />
         </Layer>
       </Layer>
 
-      <Layer id="sq" className={clsx('hidden sq:block bg-white')}>
+      <Layer id="sq" className={clsx('hidden sq:block story:hidden bg-white')}>
         {background && (
           <Layer>
             <img
@@ -167,12 +180,64 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
             />
           )}
           <Header
-            className="absolute bottom-7 right-0 left-0 w-full px-4"
+            className={clsx(
+              'absolute bottom-7 right-0 left-0 w-full px-4',
+              isDark && 'dark',
+            )}
             title={title}
             locale={locale}
             currency={currency}
             price={price}
+            color={color}
           />
+        </Layer>
+      </Layer>
+
+      <Layer id="story" className={clsx('hidden story:block bg-white')}>
+        {background && (
+          <Layer>
+            <img
+              crossOrigin="anonymous"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              src={proxy(background)}
+            />
+          </Layer>
+        )}
+
+        {background && (
+          <div className="w-full h-1/3 bg-gradient-to-b from-black absolute top-0 left-0 right-0" />
+        )}
+
+        {image && (
+          <Layer className="px-0 pt-40">
+            <div className="h-2/3 w-full bg-white -skew-y-12 transform" />
+          </Layer>
+        )}
+        {image && (
+          <Layer className="flex flex-col pt-32 pb-storysafe">
+            <img
+              className="p-6 object-contain object-top"
+              crossOrigin="anonymous"
+              src={proxy(image)}
+            />
+            <Header
+              className={clsx('', isDark && "dark")}
+              title={title}
+              locale={locale}
+              currency={currency}
+              price={price}
+              color={color}
+            />
+          </Layer>
+        )}
+
+        <Layer>
+          {logo && (
+            <img
+              src={proxy(logo)}
+              className="absolute h-8 top-storysafe right-0 left-0 w-full px-4 object-contain object-center"
+            />
+          )}
         </Layer>
       </Layer>
     </>

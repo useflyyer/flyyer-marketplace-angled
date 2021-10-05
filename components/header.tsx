@@ -8,6 +8,7 @@ export function Header({
   locale,
   currency,
   price,
+  color,
   className,
   ...props
 }: any) {
@@ -23,18 +24,19 @@ export function Header({
     >
       {title && (
         <div
+          style={{backgroundColor: color}}
           className={clsx(
             'min-w-0 flex-shrink',
-            'bg-yellow-300 pl-2 pr-1',
-            'border-b-2 border-r-2 border-yellow-400',
+            'pl-2 pr-1',
+            // 'border-b-2 border-r-2 border-yellow-400',
             'filter drop-shadow-lg',
             'transform -skew-x-12',
           )}
         >
           <h1
             className={clsx(
-              'text-gray-900 text-base sq:text-lg story:text-xl font-bold',
-              'truncate',
+              'text-gray-900 dark:text-gray-50 text-base sq:text-lg story:text-2xl font-bold text-right',
+              'line-clamp-1 sq:line-clamp-2',
               'transform skew-x-12',
             )}
           >

@@ -13,6 +13,7 @@
     "@flyyer/proxy": "^2.1.2",
     "@flyyer/types": "^2.0.2",
     "@flyyer/variables": "^2.1.3",
+    "chroma-js": "^2.1.2",
     "clsx": "^1.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
@@ -22,6 +23,7 @@
     "@parcel/config-default": "^2.0.0-rc",
     "@parcel/transformer-image": "^2.0.0-rc",
     "@tailwindcss/line-clamp": "^0.2.2",
+    "@types/chroma-js": "^2.1.3",
     "@types/react": "^17.0.27",
     "autoprefixer": "^10.3.7",
     "dotenv": "^10.0.0",
@@ -49,7 +51,9 @@
       "unicorn/no-array-callback-reference": "off",
       "@typescript-eslint/triple-slash-reference": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unused-vars": "off"
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-call": "off"
     }
   }
 }
