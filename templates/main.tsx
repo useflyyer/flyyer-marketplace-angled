@@ -57,86 +57,117 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
   const formatter = useFormatter(locale, currency);
 
   return (
-    <Layer id="banner" className={clsx('bg-white')}>
-      <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
-        <aside className={clsx('col-span-6 row-span-12')}>
-          {background && (
-            <img
-              className="w-full h-full object-cover"
-              src={background}
-              crossOrigin="anonymous"
-            />
-          )}
-        </aside>
-
-        <aside
-          className={clsx(
-            'p-3 col-span-6',
-            title || price ? 'row-span-10' : 'row-span-12',
-          )}
-        >
-          {image && (
+    <>
+      <Layer
+        id="mobile"
+        className={clsx(
+          'banner:hidden bg-white flex flex-col items-stretch justify-center',
+        )}
+      >
+        {image && (
+          <div className="flex-1">
             <img
               className="w-full h-full object-contain"
               src={image}
               crossOrigin="anonymous"
             />
-          )}
-        </aside>
+          </div>
+        )}
+        {logo && (
+          <div
+            className={clsx(
+              'bg-gray-900 p-1',
+              image ? 'h-1/6 flex-none' : 'flex-1',
+            )}
+          >
+            <img
+              src={logo}
+              className="w-full h-full object-contain object-center"
+            />
+          </div>
+        )}
       </Layer>
+      <Layer id="banner" className={clsx('hidden banner:block bg-white')}>
+        <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
+          <aside className={clsx('col-span-6 row-span-12')}>
+            {background && (
+              <img
+                className="w-full h-full object-cover"
+                src={background}
+                crossOrigin="anonymous"
+              />
+            )}
+          </aside>
 
-      <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
-        <div
-          className={clsx(
-            'col-start-0 col-span-full row-start-10 row-span-3',
-            'flex flex-row justify-end items-center',
-            'px-3 py-1 space-x-1',
-          )}
-        >
-          {title && (
-            <div
-              className={clsx(
-                'min-w-0 flex-shrink',
-                'bg-yellow-300 pl-2 pr-1',
-                'border-b-2 border-r-2 border-yellow-400',
-                'filter drop-shadow-lg',
-                'transform -skew-x-12',
-              )}
-            >
-              <h1
+          <aside
+            className={clsx(
+              'p-3 col-span-6',
+              title || price ? 'row-span-10' : 'row-span-12',
+            )}
+          >
+            {image && (
+              <img
+                className="w-full h-full object-contain"
+                src={image}
+                crossOrigin="anonymous"
+              />
+            )}
+          </aside>
+        </Layer>
+
+        <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
+          <div
+            className={clsx(
+              'col-start-0 col-span-full row-start-10 row-span-3',
+              'flex flex-row justify-end items-center',
+              'px-3 py-1 space-x-1',
+            )}
+          >
+            {title && (
+              <div
                 className={clsx(
-                  'text-gray-900 text-base font-bold',
-                  'truncate',
-                  'transform skew-x-12',
+                  'min-w-0 flex-shrink',
+                  'bg-yellow-300 pl-2 pr-1',
+                  'border-b-2 border-r-2 border-yellow-400',
+                  'filter drop-shadow-lg',
+                  'transform -skew-x-12',
                 )}
               >
-                {title}
-              </h1>
-            </div>
-          )}
+                <h1
+                  className={clsx(
+                    'text-gray-900 text-base font-bold',
+                    'truncate',
+                    'transform skew-x-12',
+                  )}
+                >
+                  {title}
+                </h1>
+              </div>
+            )}
 
-          {formatter && IS_FINITE(price) && (
-            <div
-              className={clsx(
-                'flex-none',
-                'bg-gray-700 px-1',
-                'border-b-2 border-r-2 border-gray-800',
-                'filter drop-shadow-lg',
-                'transform -skew-x-12',
-              )}
-            >
-              <p
+            {formatter && IS_FINITE(price) && (
+              <div
                 className={clsx(
-                  'text-white text-lg font-bold',
-                  'transform skew-x-12',
+                  'flex-none',
+                  'bg-gray-700 px-1',
+                  'border-b-2 border-r-2 border-gray-800',
+                  'filter drop-shadow-lg',
+                  'transform -skew-x-12',
                 )}
               >
-                {formatter.format(price)}
-              </p>
-            </div>
-          )}
-        </div>
+                <p
+                  className={clsx(
+                    'text-white text-lg font-bold',
+                    'transform skew-x-12',
+                  )}
+                >
+                  {formatter.format(price)}
+                </p>
+              </div>
+            )}
+          </div>
+        </Layer>
       </Layer>
-    </Layer>
+    </>
   );
 }
