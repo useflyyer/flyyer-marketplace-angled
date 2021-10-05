@@ -13,7 +13,6 @@ import nintendo from '../static/nintendo.png';
 
 import {Layer} from '../components/layers';
 import {Header} from '../components/header';
-import {useFormatter} from '../hooks/use-formatter';
 import {IS_FINITE} from '../utils';
 
 /**
@@ -65,8 +64,6 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
     isDark = L < 70;
     console.log({L, isDark});
   }
-
-  const formatter = useFormatter(locale, currency);
 
   return (
     <Layer className="overflow-hidden">

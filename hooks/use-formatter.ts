@@ -14,12 +14,17 @@ export function useFormatter(
         ...options,
       });
     } catch {
-      return new Intl.NumberFormat(locale, {
-        style: 'currency',
-        currency,
-        currencyDisplay: 'symbol', // Fallback
-        ...options,
-      });
+      try {
+        // Catch invalid currency code
+        return new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency,
+          currencyDisplay: 'symbol', // Fallback
+          ...options,
+        });
+      } catch {
+        return null;;
+      }
     }
   }, [currency, locale, options]);
 }
