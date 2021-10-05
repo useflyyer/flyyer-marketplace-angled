@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {Variable as V, Validator, Static} from '@flyyer/variables';
-
+import {proxy} from '@flyyer/proxy';
 import {TemplateProps} from '@flyyer/types';
 
 import '../styles/tailwind.css';
@@ -13,6 +13,7 @@ import nintendo from '../static/nintendo.png';
 import {Layer} from '../components/layers';
 import {useFormatter} from '../hooks/use-formatter';
 import {IS_FINITE} from '../utils';
+import {Header} from '../components/header';
 
 /**
  * Export to enable variables UI on Flyyer.io
@@ -60,16 +61,14 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
     <>
       <Layer
         id="mobile"
-        className={clsx(
-          'banner:hidden bg-white flex flex-col items-stretch justify-center',
-        )}
+        className={clsx('banner:hidden bg-white grid grid-rows-6')}
       >
         {image && (
-          <div className="flex-1">
+          <div className={clsx(logo ? 'row-span-5' : 'row-span-full')}>
             <img
               className="w-full h-full object-contain"
-              src={image}
               crossOrigin="anonymous"
+              src={proxy(image)}
             />
           </div>
         )}
@@ -77,24 +76,28 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
           <div
             className={clsx(
               'bg-gray-900 p-1',
-              image ? 'h-1/6 flex-none' : 'flex-1',
+              image ? 'row-span-1' : 'row-span-full',
             )}
           >
             <img
               src={logo}
+              crossOrigin="anonymous"
               className="w-full h-full object-contain object-center"
             />
           </div>
         )}
       </Layer>
-      <Layer id="banner" className={clsx('hidden banner:block bg-white')}>
+      <Layer
+        id="banner"
+        className={clsx('hidden banner:block sq:hidden bg-white')}
+      >
         <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
           <aside className={clsx('col-span-6 row-span-12')}>
             {background && (
               <img
                 className="w-full h-full object-cover"
-                src={background}
                 crossOrigin="anonymous"
+                src={proxy(background)}
               />
             )}
           </aside>
@@ -108,64 +111,68 @@ export default function MainTemplate(props: TemplateProps<Variables>) {
             {image && (
               <img
                 className="w-full h-full object-contain"
-                src={image}
                 crossOrigin="anonymous"
+                src={proxy(image)}
               />
             )}
           </aside>
         </Layer>
 
         <Layer className={clsx('grid grid-cols-12 grid-rows-12')}>
-          <div
-            className={clsx(
-              'col-start-0 col-span-full row-start-10 row-span-3',
-              'flex flex-row justify-end items-center',
-              'px-3 py-1 space-x-1',
-            )}
-          >
-            {title && (
-              <div
-                className={clsx(
-                  'min-w-0 flex-shrink',
-                  'bg-yellow-300 pl-2 pr-1',
-                  'border-b-2 border-r-2 border-yellow-400',
-                  'filter drop-shadow-lg',
-                  'transform -skew-x-12',
-                )}
-              >
-                <h1
-                  className={clsx(
-                    'text-gray-900 text-base font-bold',
-                    'truncate',
-                    'transform skew-x-12',
-                  )}
-                >
-                  {title}
-                </h1>
-              </div>
-            )}
+          <Header
+            className="col-start-0 col-span-full row-start-10 row-span-3"
+            title={title}
+            locale={locale}
+            currency={currency}
+            price={price}
+          />
+        </Layer>
+      </Layer>
 
-            {formatter && IS_FINITE(price) && (
-              <div
-                className={clsx(
-                  'flex-none',
-                  'bg-gray-700 px-1',
-                  'border-b-2 border-r-2 border-gray-800',
-                  'filter drop-shadow-lg',
-                  'transform -skew-x-12',
-                )}
-              >
-                <p
-                  className={clsx(
-                    'text-white text-lg font-bold',
-                    'transform skew-x-12',
-                  )}
-                >
-                  {formatter.format(price)}
-                </p>
-              </div>
-            )}
-          </div>
+      <Layer id="sq" className={clsx('hidden sq:block bg-white')}>
+        {background && (
+          <Layer>
+            <img
+              crossOrigin="anonymous"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              src={proxy(background)}
+            />
+          </Layer>
+        )}
+
+        {background && (
+          <div className="w-full h-1/2 bg-gradient-to-b from-black absolute top-0 left-0 right-0" />
+        )}
+
+        {image && (
+          <Layer className="flex pl-12 pr-6 pt-20 pb-12">
+            <div className="flex-1 bg-white -skew-y-12 transform" />
+          </Layer>
+        )}
+        {image && (
+          <Layer className="flex pl-12 pr-6 pt-20 pb-12">
+            <img
+              className="flex-1 p-2 object-contain object-top"
+              crossOrigin="anonymous"
+              src={proxy(image)}
+            />
+          </Layer>
+        )}
+
+        <Layer>
+          {logo && (
+            <img
+              src={proxy(logo)}
+              className="absolute h-8 top-8 right-0 left-0 w-full px-4 object-contain object-left"
+            />
+          )}
+          <Header
+            className="absolute bottom-7 right-0 left-0 w-full px-4"
+            title={title}
+            locale={locale}
+            currency={currency}
+            price={price}
+          />
         </Layer>
       </Layer>
     </>
